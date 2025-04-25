@@ -24,21 +24,26 @@ app.get('/', async function (request, response) {
     response.render('index.liquid')
 })
 
-app.get('/schrijfopdracht', async function (request, response) {
-    const personResponse = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_task')
+// app.get('/schrijfopdracht', async function (request, response) {
+//     const personResponse = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_task')
     
-    const personResponseJSON = await personResponse.json()
+//     const personResponseJSON = await personResponse.json()
   
-    response.render('schrijfopdracht.liquid', { persons: personResponseJSON.data })
-  })
+//     response.render('schrijfopdracht.liquid', { persons: personResponseJSON.data })
+//   })
   
-  app.get('/community-drop', async function (request, response) {
+  app.get('/community-drops', async function (request, response) {
     console.log("GET community drops")
     const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
     
     const messagesJSON = await messagesAPI.json()
   
-    response.render('community-drop.liquid', { messages: messagesJSON.data })
+    // const anoniemKnop = document.querySelector(".anoniem-btn")
+    // if anoniemKnop.checked == true{
+
+    // }
+
+    response.render('community-drops.liquid', { messages: messagesJSON.data })
   })
   
   app.get('/all-drops', async function (request, response) {
@@ -55,6 +60,7 @@ app.post('/messages/', async function (request, response) {
        const postResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1', {
       method: 'POST',
       body: JSON.stringify({
+        //je kan hier een if doen die checkt of request.body.from leeg is, zo ja dan "anonoumes"
         from: request.body.from,
         text: request.body.text
       }),
