@@ -2,6 +2,16 @@
 
 <h1>{{ exercise.title |  split: ":" | first }}</h1>
 
-<div>
+<section>
+    <a href="community-drops">←</a>
     <p>{{ exercise.type }} | {{ exercise.duration }} minuten</p>
-</div>
+    <p>{{ exercise.description }}</p>
+</section>
+
+<section>
+    <div class="form-group">
+        <textarea name="text" required></textarea>
+    </div>
+    <button type="submit" class="concept-btn">Concept opslaan</button>
+    <button type="submit" class="submit-btn">Afgerond</button>
+</section>
