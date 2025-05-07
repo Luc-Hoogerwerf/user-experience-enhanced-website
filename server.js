@@ -62,7 +62,7 @@ app.post('/messages', async function (request, response) {
     const postResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1', {
       method: 'POST',
       body: JSON.stringify({
-        from: request.body.from,
+        from: request.body.from.length > 0 ? request.body.from : "Anoniem",
         text: request.body.text
       }),
       headers: {
