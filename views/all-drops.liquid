@@ -20,6 +20,11 @@
                             </span>
                             <figcaption class="user-details">
                                 <h3>{{ message.from }}</h3>
+                                {% if message.from %}
+                                    <h3>{{ message.from }}</h3>
+                                  {% else %}
+                                    <h3>Anoniem</h3>
+                                  {% endif %}
                                 <time class="drop-date">op {{ message.date_created | date: "%-d %B" }}</time>
                             </figcaption>
                         </figure>
