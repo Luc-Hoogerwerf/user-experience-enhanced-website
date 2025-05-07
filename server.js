@@ -24,15 +24,8 @@ app.get('/', async function (request, response) {
     response.render('index.liquid')
 })
 
-// app.get('/schrijfopdracht', async function (request, response) {
-//     const personResponse = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_task')
-    
-//     const personResponseJSON = await personResponse.json()
   
-//     response.render('schrijfopdracht.liquid', { persons: personResponseJSON.data })
-//   })
-  
-  app.get('/community-drops', async function (request, response) {
+app.get('/community-drops', async function (request, response) {
     console.log("GET community drops")
     const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
     
@@ -41,7 +34,7 @@ app.get('/', async function (request, response) {
     response.render('community-drops.liquid', { messages: messagesJSON.data })
   })
   
-  app.get('/all-drops', async function (request, response) {
+app.get('/all-drops', async function (request, response) {
 
     const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
     
@@ -49,6 +42,16 @@ app.get('/', async function (request, response) {
   
     response.render('all-drops.liquid', { messages: messagesJSON.data })
   })
+
+app.get('/schrijfopdracht', async function (request, response) {
+  
+    const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
+    
+    const messagesJSON = await messagesAPI.json()
+
+    response.render('schrijfopdracht.liquid', { messages: messagesJSON.data })
+  })
+
 
 //post routes
 
