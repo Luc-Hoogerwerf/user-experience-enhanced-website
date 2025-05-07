@@ -19,6 +19,9 @@ app.set('views', './views')
 
 app.set('port', process.env.PORT || 8000)
 
+// Thema's
+
+
 // get routes
 app.get('/', async function (request, response) {
     response.render('index.liquid')
@@ -45,16 +48,15 @@ app.get('/all-drops', async function (request, response) {
 
 app.get('/schrijfopdracht', async function (request, response) {
   
-    const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
+    const exerciseAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_exercise/9')
     
-    const messagesJSON = await messagesAPI.json()
+    const exerciseJSON = await exerciseAPI.json()
 
-    response.render('schrijfopdracht.liquid', { messages: messagesJSON.data })
+    response.render('schrijfopdracht.liquid', { exercise: exerciseJSON.data })
   })
 
 
 //post routes
-
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 

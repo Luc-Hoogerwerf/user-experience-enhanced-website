@@ -1,7 +1,7 @@
 {% render 'partials/head.liquid' %}
 
-<h1>Ons leven samen</h1>
+<h1>{{ exercise.title |  split: ":" | first }}</h1>
 
-<section>
-    
-</section>
+<div>
+    <p>{{ exercise.type }} | {{ exercise.duration }} minuten</p>
+</div>
