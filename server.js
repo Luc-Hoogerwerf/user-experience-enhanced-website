@@ -37,17 +37,12 @@ app.get('/', async function (request, response) {
     const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
     
     const messagesJSON = await messagesAPI.json()
-  
-    // const anoniemKnop = document.querySelector(".anoniem-btn")
-    // if anoniemKnop.checked == true{
-
-    // }
 
     response.render('community-drops.liquid', { messages: messagesJSON.data })
   })
   
   app.get('/all-drops', async function (request, response) {
-  
+
     const messagesAPI = await fetch ('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1&sort=-date_created')
     
     const messagesJSON = await messagesAPI.json()
@@ -56,11 +51,17 @@ app.get('/', async function (request, response) {
   })
 
 //post routes
-app.post('/messages/', async function (request, response) {
-       const postResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1', {
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+app.post('/messages', async function (request, response) {
+    console.log("POST messages")
+    console.log(request.body)
+   
+    const postResponse = await fetch('https://fdnd-agency.directus.app/items/dropandheal_messages?limit=-1', {
       method: 'POST',
       body: JSON.stringify({
-        //je kan hier een if doen die checkt of request.body.from leeg is, zo ja dan "anonoumes"
         from: request.body.from,
         text: request.body.text
       }),
@@ -69,7 +70,7 @@ app.post('/messages/', async function (request, response) {
       },
     });
     console.log(postResponse);
-   // Stuur gebruikers naar overzicht drops pagina
+   // Redirect naar de volgende pagina
     response.redirect(303, `/all-drops`);
   })
 
